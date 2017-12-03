@@ -2,10 +2,8 @@
 
 
 
-  
 
-
-<html class="theme-next muse use-motion" lang="zh-CN">
+<html class="theme-next mist" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -94,17 +92,17 @@
 
 
 
-<meta name="description" content="Vue.directive(&apos;focus&apos;, {   inserted: function (el) {     el.focus()   } }) new Vue({   el: &apos;#simplest-directive-example&apos; })">
+<meta name="description" content="原理简介perspective 视距 perspective属性对于3D变形来说至关重要。该属性会设置查看者的位置，并将可视内容映射到一个视锥上，继而投到一个2D视平面上。如果不指定透视，则Z轴空间中的所有点将平铺到同一个2D视平面中，并且变换结果中将不存在景深概念。 perspective在Z轴上，而perspective是设置Z轴的长度。在css3中只有设置了perspective的值元素才会">
 <meta property="og:type" content="article">
-<meta property="og:title" content="perspective-mini-start">
+<meta property="og:title" content="结合perspective实现transform立体效果">
 <meta property="og:url" content="http://yoursite.com/2017/12/03/perspective-mini-start/index.html">
 <meta property="og:site_name" content="叶花蝶">
-<meta property="og:description" content="Vue.directive(&apos;focus&apos;, {   inserted: function (el) {     el.focus()   } }) new Vue({   el: &apos;#simplest-directive-example&apos; })">
+<meta property="og:description" content="原理简介perspective 视距 perspective属性对于3D变形来说至关重要。该属性会设置查看者的位置，并将可视内容映射到一个视锥上，继而投到一个2D视平面上。如果不指定透视，则Z轴空间中的所有点将平铺到同一个2D视平面中，并且变换结果中将不存在景深概念。 perspective在Z轴上，而perspective是设置Z轴的长度。在css3中只有设置了perspective的值元素才会">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-03T11:08:51.732Z">
+<meta property="og:updated_time" content="2017-12-03T16:02:27.362Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="perspective-mini-start">
-<meta name="twitter:description" content="Vue.directive(&apos;focus&apos;, {   inserted: function (el) {     el.focus()   } }) new Vue({   el: &apos;#simplest-directive-example&apos; })">
+<meta name="twitter:title" content="结合perspective实现transform立体效果">
+<meta name="twitter:description" content="原理简介perspective 视距 perspective属性对于3D变形来说至关重要。该属性会设置查看者的位置，并将可视内容映射到一个视锥上，继而投到一个2D视平面上。如果不指定透视，则Z轴空间中的所有点将平铺到同一个2D视平面中，并且变换结果中将不存在景深概念。 perspective在Z轴上，而perspective是设置Z轴的长度。在css3中只有设置了perspective的值元素才会">
 
 
 
@@ -112,14 +110,14 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
-    motion: true,
+    motion: false,
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -139,7 +137,7 @@
 
 
 
-  <title>perspective-mini-start | 叶花蝶</title>
+  <title>结合perspective实现transform立体效果 | 叶花蝶</title>
   
 
 
@@ -199,7 +197,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            首页
           </a>
         </li>
       
@@ -209,7 +207,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            归档
           </a>
         </li>
       
@@ -219,7 +217,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -230,7 +228,6 @@
 
   
 </nav>
-
 
 
  </div>
@@ -273,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">perspective-mini-start</h1>
+          <h1 class="post-title" itemprop="name headline">结合perspective实现transform立体效果</h1>
         
 
         <div class="post-meta">
@@ -283,9 +280,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-03T18:31:48+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-03T18:31:48+08:00">
                 2017-12-03
               </time>
             
@@ -323,21 +320,137 @@
       
 
       
-        
-<div id="simplest-directive-example" class="demo">
-  <input v-focus="">
+        <h3 id="原理简介"><a href="#原理简介" class="headerlink" title="原理简介"></a>原理简介</h3><h4 id="perspective-视距"><a href="#perspective-视距" class="headerlink" title="perspective 视距"></a>perspective 视距</h4><ul>
+<li>perspective属性对于3D变形来说至关重要。该属性会设置查看者的位置，并将可视内容映射到一个视锥上，继而投到一个2D视平面上。如果不指定透视，则Z轴空间中的所有点将平铺到同一个2D视平面中，并且变换结果中将不存在景深概念。</li>
+<li>perspective在Z轴上，而perspective是设置Z轴的长度。在css3中只有设置了perspective的值元素才会有Z轴，perspective为none元素则没有Z轴(就是2D元素)。</li>
+<li>总结如下：<br>  perspective取值为none或不设置，就没有真3D空间。<br>  perspective取值越小，3D效果就越明显，也就是你的眼睛越靠近真3D。<br>  perspective的值无穷大，或值为0时与取值为none效果一样。</li>
+<li>获取焦点改变后perspective从500px改变为100px：<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="undefined">    .box &#123;</span></div><div class="line"><span class="undefined">        outline: 1px solid red;</span></div><div class="line"><span class="undefined">        margin: 100px auto;</span></div><div class="line"><span class="undefined">        width: 500px;</span></div><div class="line"><span class="undefined">        height: 100px;</span></div><div class="line"><span class="undefined">        transition: all 1.5s;</span></div><div class="line"><span class="undefined">        perspective: 500px;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">    .box:hover &#123;</span></div><div class="line"><span class="undefined">        perspective: 100px;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">    .child &#123;</span></div><div class="line"><span class="undefined">        width: 100px;</span></div><div class="line"><span class="undefined">        height: 100px;</span></div><div class="line"><span class="undefined">        float: left;</span></div><div class="line"><span class="undefined">        background-color: lightsalmon;</span></div><div class="line"><span class="undefined">        transform: rotateY(90deg);</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+<style>
+    .box {
+        outline: 1px solid red;
+        margin: 10px auto;
+        width: 500px;
+        height: 100px;
+        transition: all 1.5s;
+        perspective: 500px;
+    }
+    .box:hover {
+        perspective: 100px;
+    }
+    .child {
+        width: 100px;
+        height: 100px;
+        float: left;
+        background-color: lightsalmon;
+        transform: rotateY(90deg);
+    }
+</style>
+<div class="box">
+    <div class="child"></div>
+    <div class="child"></div>
+    <div class="child"></div>
+    <div class="child"></div>
+    <div class="child"></div>
 </div>
+
+<h4 id="perspective两种写法"><a href="#perspective两种写法" class="headerlink" title="perspective两种写法"></a>perspective两种写法</h4><ul>
+<li><p>perspective属性有两种书写形式，一种用在舞台元素上（动画元素们的共同父辈元素）；第二种就是用在当前动画元素上，与transform的其他属性写在一起。如下代码示例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.stage</span> &#123;</div><div class="line">    <span class="attribute">perspective</span>: <span class="number">600px</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#stage</span> <span class="selector-class">.box</span> &#123;</div><div class="line">    <span class="attribute">transform</span>: <span class="built_in">perspective</span>(600px) <span class="built_in">rotateY</span>(45deg);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>虽然perspective属性和perspective()函数所起的功能是一样的，但其取值以及以运用的对像有所不同：</p>
+<ul>
+<li>perspective属性可以取值为none或长度值；而perspective()函数取值只能大于0，如果取值为0或比0小的值，将无法激活3D空间；</li>
+<li>perspective属性用于变形对像父元素；而perspective()函数用于变形对像自身，并和transform其他函数一起使用。</li>
+</ul>
+</li>
+</ul>
+<h4 id="transform-style"><a href="#transform-style" class="headerlink" title="transform-style"></a>transform-style</h4><ul>
+<li>transform-style属性是3D空间一个重要属性，指定嵌套元素如何在3D空间中呈现。</li>
+<li>transform-style属性的使用语法非常简单：</li>
+<li>transform-style: flat | preserve-3d<ul>
+<li>其中flat值为默认值，表示所有子元素在2D平面呈现。preserve-3d表示所有子元素在3D空间中呈现。</li>
+<li>也就是说，如果对一个元素设置了transform-style的值为flat，则该元素的所有子元素都将被平展到该元素的2D平面中进行呈现。沿着X轴或Y轴方向旋转该元素将导致位于正或负Z轴位置的子元素显示在该元素的平面上，而不是它的前面或者后面。如果对一个元素设置了transform-style的值为preserve-3d，它表示不执行平展操作，他的所有子元素位于3D空间中。</li>
+</ul>
+</li>
+<li>transform-style属性需要设置在父元素中，并且高于任何嵌套的变形元素。</li>
+</ul>
+<h3 id="实例-立体的墙壁"><a href="#实例-立体的墙壁" class="headerlink" title="实例:立体的墙壁"></a>实例:立体的墙壁</h3><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> outer = <span class="built_in">document</span>.querySelector(<span class="string">".test-3d"</span>);</div><div class="line">outer.innerHTML = <span class="built_in">Array</span>(<span class="number">6</span>).fill(<span class="string">"&lt;li&gt;"</span>).join(<span class="string">""</span>);<span class="comment">/*填仓子元素 个数是动态的*/</span></div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> preDeg, translateZ;</div><div class="line">    <span class="built_in">Array</span>.from(<span class="built_in">document</span>.querySelectorAll(<span class="string">".test-3d&gt;li"</span>)).forEach(<span class="function"><span class="keyword">function</span> (<span class="params">ele, i, all</span>) </span>&#123;</div><div class="line">        preDeg = <span class="number">360</span> / all.length;</div><div class="line">        translateZ = (ele.clientWidth / <span class="number">2</span>) / <span class="built_in">Math</span>.tan((preDeg / (<span class="number">2</span> * <span class="number">180</span>)) * <span class="built_in">Math</span>.PI);</div><div class="line">        ele.style.transform = <span class="string">`rotateY(<span class="subst">$&#123;preDeg * i&#125;</span>deg) translateZ(<span class="subst">$&#123;translateZ * <span class="number">1.5</span>&#125;</span>px)`</span>;</div><div class="line">        ele.innerHTML = i;</div><div class="line">    &#125;)</div><div class="line">&#125;, <span class="number">100</span>);</div></pre></td></tr></table></figure>
+<h4 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h4>
+<style>
+    .test-3d {
+        outline: 1px solid red;
+        width: 300px;
+        height: 50px;
+        margin: 200px auto;
+        /*perspective: 1000px;*/
+        transform-style: preserve-3d;
+        background: lightcoral;
+        /*backface-visibility: hidden;*/
+
+        transform: perspective(1000px) rotateX(-30deg) rotateY(30deg) rotateZ(0deg); /*立体效果*/
+        /*transform: perspective(1000px) rotateX(30deg) rotateY(0deg) rotateZ(30deg); !*立体效果*!*/
+    }
+    .test-3d > li {
+        list-style: none!important;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto; /*绝对居中*/
+
+        outline: 1px solid red;
+        width: 100px;
+        height: 100px;
+
+        transform: rotateY(0deg) translateZ(0px);
+        transition: transform 1s ease-in-out;
+
+    }
+</style>
+<ul class="test-3d">
+</ul>
 <script>
-Vue.directive('focus', {
-  inserted: function (el) {
-    el.focus()
-  }
-})
-new Vue({
-  el: '#simplest-directive-example'
-})
+    let outer = document.querySelector(".test-3d");
+    outer.innerHTML = Array(6).fill("<li>").join("");/*填仓子元素 个数是动态的*/
+    setTimeout(function () {
+        let preDeg, translateZ;
+        Array.from(document.querySelectorAll(".test-3d>li")).forEach(function (ele, i, all) {
+            preDeg = 360 / all.length;
+            translateZ = (ele.clientWidth / 2) / Math.tan((preDeg / (2 * 180)) * Math.PI);
+            ele.style.transform = `rotateY(${preDeg * i}deg) translateZ(${translateZ * 1.5}px)`;
+            ele.innerHTML = i;
+        })
+    }, 100);
+
+    (function () {
+        let deg = 0;
+    
+        function run() {
+            deg++;
+            outer.style.transform = `perspective(1000px) rotateX(-30deg) rotateY(${deg}deg) rotateZ(0deg)`;
+            requestAnimationFrame(run)
+        }
+
+        requestAnimationFrame(run);
+    })()
 </script>
 
+<h3 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h3><pre><code>http://www.zhangxinxu.com/wordpress/2012/09/css3-3d-transform-perspective-animate-transition/
+好吧，CSS3 3D transform变换，不过如此！
+
+https://www.cnblogs.com/MirageFox/p/5978150.html
+CSS3打造3D效果——perspective transform的深度剖析
+
+https://www.w3cplus.com/css3/css3-2d-transform.html
+CSS3 2D Transform
+
+https://www.w3cplus.com/css3/transform-basic-property.html
+Transform-style和Perspective属性
+</code></pre>
       
     </div>
     
@@ -421,8 +534,17 @@ new Vue({
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -438,7 +560,7 @@ new Vue({
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
                 <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
@@ -467,6 +589,22 @@ new Vue({
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理简介"><span class="nav-number">1.</span> <span class="nav-text">原理简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#perspective-视距"><span class="nav-number">1.1.</span> <span class="nav-text">perspective 视距</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#perspective两种写法"><span class="nav-number">1.2.</span> <span class="nav-text">perspective两种写法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#transform-style"><span class="nav-number">1.3.</span> <span class="nav-text">transform-style</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例-立体的墙壁"><span class="nav-number">2.</span> <span class="nav-text">实例:立体的墙壁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码"><span class="nav-number">2.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#demo"><span class="nav-number">2.2.</span> <span class="nav-text">demo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#来源"><span class="nav-number">3.</span> <span class="nav-text">来源</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -492,13 +630,13 @@ new Vue({
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
-  Theme -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 
