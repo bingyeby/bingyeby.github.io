@@ -99,7 +99,7 @@
 <meta property="og:site_name" content="叶花蝶">
 <meta property="og:description" content="原理简介perspective 视距 perspective属性对于3D变形来说至关重要。该属性会设置查看者的位置，并将可视内容映射到一个视锥上，继而投到一个2D视平面上。如果不指定透视，则Z轴空间中的所有点将平铺到同一个2D视平面中，并且变换结果中将不存在景深概念。 perspective在Z轴上，而perspective是设置Z轴的长度。在css3中只有设置了perspective的值元素才会">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-03T16:40:21.894Z">
+<meta property="og:updated_time" content="2017-12-03T16:54:48.155Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="结合perspective实现transform立体效果">
 <meta name="twitter:description" content="原理简介perspective 视距 perspective属性对于3D变形来说至关重要。该属性会设置查看者的位置，并将可视内容映射到一个视锥上，继而投到一个2D视平面上。如果不指定透视，则Z轴空间中的所有点将平铺到同一个2D视平面中，并且变换结果中将不存在景深概念。 perspective在Z轴上，而perspective是设置Z轴的长度。在css3中只有设置了perspective的值元素才会">
@@ -366,7 +366,15 @@
 </ul>
 <iframe width="100%" height="300" src="//jsrun.net/GniKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
+<ul>
+<li>增加子元素个数，并控制子元素垂直方向上随机偏移即可实现圆柱型效果<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">outer.innerHTML = <span class="built_in">Array</span>(<span class="number">200</span>).fill(<span class="string">"&lt;li&gt;"</span>).join(<span class="string">""</span>);<span class="comment">/*填仓子元素 个数是动态的*/</span></div><div class="line">ele.style.transform = <span class="string">`rotateY(<span class="subst">$&#123;preDeg * i&#125;</span>deg) translateZ(<span class="subst">$&#123;<span class="number">400</span>&#125;</span>px) translateY(<span class="subst">$&#123;<span class="built_in">Math</span>.random()*<span class="number">1000</span>&#125;</span>px)`</span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<iframe width="100%" height="300" src="//jsrun.net/CniKp/embedded/all/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
+<ul>
+<li>在此基础上即可实现如下效果<br>  <a href="http://2013.miaov.com/miaov_demo/3dLable2015/" target="_blank" rel="external">3D圆球、3D圆锥、3D柱状扭曲</a></li>
+</ul>
 <h3 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h3><pre><code>http://www.zhangxinxu.com/wordpress/2012/09/css3-3d-transform-perspective-animate-transition/
 好吧，CSS3 3D transform变换，不过如此！
 
@@ -378,6 +386,9 @@ CSS3 2D Transform
 
 https://www.w3cplus.com/css3/transform-basic-property.html
 Transform-style和Perspective属性
+
+3D圆球、3D圆锥、3D柱状扭曲
+http://www.miaov.com/index.php/news/newsDetail/nid/218
 </code></pre>
       
     </div>
